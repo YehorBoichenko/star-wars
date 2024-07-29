@@ -11,7 +11,7 @@ export enum TitleClass {
   h2 = 'text-2xl font-bold',
   h3 = 'text-xl font-semibold',
   h4 = 'text-lg font-semibold',
-  h5 = 'text-base font-semibold',
+  h5 = 'text-base font-semibold'
 }
 
 /**

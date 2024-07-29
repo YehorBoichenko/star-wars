@@ -8,7 +8,7 @@ import {
   ConflictError,
   TooManyRequestsError,
   BadGatewayError,
-  InternalServerError,
+  InternalServerError
 } from '@/api/error-types';
 
 /**
@@ -24,7 +24,7 @@ interface ErrorResponseData {
 const api = axios.create({
   baseURL: process.env.SERVER_URL,
   timeout: 10_000,
-  withCredentials: true,
+  withCredentials: true
 });
 
 /**
@@ -64,8 +64,8 @@ const handleError = (error: AxiosError<ErrorResponseData>): Promise<never> => {
  * Set up an interceptor to handle errors for the axios api
  */
 api.interceptors.response.use(
-  response => response,
-  error => handleError(error)
+  (response) => response,
+  (error) => handleError(error)
 );
 
 export default api;

@@ -9,13 +9,13 @@ import type { ShipType } from '@/types/starship';
 export function generateFilmNodes(films: MovieType[]) {
   return films.map((film, index) => ({
     id: film.title,
-    type: 'film-node',
+    type: 'movie-node',
     data: {
       id: film.id,
       label: film.title,
       starships: film.starships
     },
-    position: { x: 200 + index * 300, y: 150 },
+    position: { x: 250 + index * 300, y: 185 }
   }));
 }
 
@@ -27,12 +27,12 @@ export function generateFilmNodes(films: MovieType[]) {
 export function generateStarshipNodes(starships: ShipType[]) {
   return starships.map((starship, index) => ({
     id: starship.name,
-    type: 'starship-node',
+    type: 'ship-node',
     data: {
       id: starship.id,
       label: starship.name
     },
-    position: { x: 50 + index * 250, y: 400 },
+    position: { x: 10 + index * 250, y: 415 }
   }));
 }
 
@@ -43,10 +43,10 @@ export function generateStarshipNodes(starships: ShipType[]) {
  * @returns Array of edges.
  */
 export function generateFilmEdges(personName: string, films: MovieType[]) {
-  return films.map(film => ({
+  return films.map((film) => ({
     id: `${personName}-${film.title}`,
     source: personName,
-    target: film.title,
+    target: film.title
   }));
 }
 
@@ -57,14 +57,17 @@ export function generateFilmEdges(personName: string, films: MovieType[]) {
  * @returns Array of edges.
  */
 export function generateStarshipEdges(films: MovieType[], starships: ShipType[]) {
-  return films.flatMap(film =>
-    film.starships.map(starshipId => {
-      const starship = starships.find(ship => ship.id === starshipId);
-      return starship ? {
-        id: `${film.title}-${starship.name}`,
-        source: film.title,
-        target: starship.name,
-      } : null;
-    }).filter(edge => edge !== null) as { id: string; source: string; target: string }[]
+  return films.flatMap((film) =>
+    film.starships.reduce((edges, starshipId) => {
+      const starship = starships.find((ship) => ship.id === starshipId);
+      if (starship) {
+        edges.push({
+          id: `${film.title}-${starship.name}`,
+          source: film.title,
+          target: starship.name
+        });
+      }
+      return edges;
+    }, [] as { id: string; source: string; target: string }[])
   );
 }

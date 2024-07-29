@@ -8,7 +8,10 @@
  * @param {number} wait - The number of milliseconds to delay.
  * @returns {(...args: Parameters<T>) => void} - A debounced version of the callback function.
  */
-export const debounce = <T extends (...args: any[]) => void>(callback: T, wait: number): (...args: Parameters<T>) => void => {
+export const debounce = <T extends (...args: any[]) => void>(
+  callback: T,
+  wait: number
+): ((...args: Parameters<T>) => void) => {
   let timeoutId: NodeJS.Timeout;
 
   return (...args: Parameters<T>) => {

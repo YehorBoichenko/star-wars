@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
-import { getCharacters } from "@/api/actions/get-charachters.action";
-import { CharacterType } from "@/types/charachter";
+import { useState, useEffect, useCallback } from 'react';
+import { getCharacters } from '@/api/actions/get-charachters.action';
+import { CharacterType } from '@/types/character';
 
 /**
- * Custom hook for fetching people data with pagination.
- * @returns Object containing people data, loading state, error state, and load more function.
+ * Custom hook for fetching characters data with pagination.
+ * @returns Object containing characters data, loading state, error state, and load more function.
  */
 const useCharacters = () => {
   const [charactersList, setcharactersList] = useState<CharacterType[]>([]);
@@ -14,48 +14,51 @@ const useCharacters = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   /**
-   * Fetches people data from the API.
+   * Fetches characters data from the API.
    * @param pageNumber - The page number to fetch.
    */
-  const fetchPeopleData = useCallback(async (pageNumber: number) => {
+  const fetchCharactersData = useCallback(async (pageNumber: number) => {
     setLoading(true);
     setErrorMessage(null);
 
     try {
       const response = await getCharacters(pageNumber);
-      setcharactersList(prevPeople => {
+      setcharactersList((prevCharacters) => {
         // Filter out duplicates by id
-        const newPeople = response.results.filter(char => 
-          !prevPeople.some(prevChar => prevChar.id === char.id)
-        );
-        return [...prevPeople, ...newPeople];
+        const newCharacters = response.results.filter((char) => !prevCharacters.some((prevChar) => prevChar.id === char.id));
+        return [...prevCharacters, ...newCharacters];
       });
-      setPage(prevPage => prevPage + 1);
+      setPage((prevPage) => prevPage + 1);
       setHasNextPage(!!response.next);
     } catch (error) {
-      setErrorMessage("Error fetching people data.");
-      console.error("Error fetching people data:", error);
+      if (pageNumber === 1) {
+        setErrorMessage('Error fetching initial data.');
+      } else {
+        setErrorMessage('No more data to fetch.');
+        setHasNextPage(false);
+      }
     } finally {
       setLoading(false);
     }
   }, []);
 
   /**
-   * Loads more people data.
+   * Loads more Characters data.
    */
-  const loadMorePeople = () => {
-    fetchPeopleData(page);
+  const loadMoreCharacters = () => {
+    if (!loading && hasNextPage) {
+      fetchCharactersData(page);
+    }
   };
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      await fetchPeopleData(1);
+      await fetchCharactersData(1);
     };
     fetchInitialData();
-  }, [fetchPeopleData]);
+  }, [fetchCharactersData]);
 
-  return { charactersList, hasNextPage, loading, errorMessage, loadMorePeople };
+  return { charactersList, hasNextPage, loading, errorMessage, loadMoreCharacters };
 };
 
 export default useCharacters;
-

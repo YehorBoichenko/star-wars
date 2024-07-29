@@ -1,4 +1,4 @@
-import type { CharacterType } from '@/types/charachter';
+import type { CharacterType } from '@/types/character';
 
 /**
  * Type representing the keys of CharacterType
@@ -18,5 +18,5 @@ export const characterProperties: CharacterProperty[] = [
   'skin_color',
   'eye_color',
   'birth_year',
-  'gender',
+  'gender'
 ];

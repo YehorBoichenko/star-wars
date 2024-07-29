@@ -9,7 +9,7 @@ import Text from '@/components/ui/text';
  */
 export default function ShipNode({ data }: NodeProps) {
   return (
-    <div className="p-4 shadow-md rounded-md border-2 border-white bg-blue-500">
+    <div className="p-4 shadow-lg shadow-red-500 rounded-md border-2 border-red-500 bg-red-700 transition-shadow duration-300 hover:border-white hover:shadow-none hover:bg-red-500">
       <NodeContent label={data.label} />
       <Handle
         type="target"

@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
  */
 export const metadata: Metadata = {
   title: 'SWAPI - application',
-  description: 'Next.js test task',
+  description: 'Next.js test task'
 };
 
 /**
@@ -25,12 +25,8 @@ export const metadata: Metadata = {
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-100 text-gray-900`}>
-        <ContentLayout>
-            {children}
-
-          
-        </ContentLayout>
+      <body className={`${inter.className}  text-gray-900`}>
+        <ContentLayout>{children}</ContentLayout>
       </body>
     </html>
   );

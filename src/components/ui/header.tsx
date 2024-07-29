@@ -30,7 +30,7 @@ interface HeaderSectionProps {
 function HeaderSection({ title }: HeaderSectionProps): JSX.Element {
   return (
     <section className="flex justify-between items-center bg-black text-white p-6 mt-3 rounded-md border border-gold glowing-border">
- <Image src="/header_logo.png" alt="Logo" width={400} height={80} className="w-40 h-12" />
+      <Image src="/header_logo.png" alt="Logo" width={400} height={80} className="w-40 h-12" />
       <Title as="h3">{title}</Title>
     </section>
   );

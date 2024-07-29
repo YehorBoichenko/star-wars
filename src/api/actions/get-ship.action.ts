@@ -16,7 +16,6 @@ export async function fetchStarshipsByIds(ids: string[]): Promise<{ data: ShipTy
     const response = await api.get(requestUrl);
     const { data } = response;
 
-    // Assuming the API response includes all starships in one response
     const starships: ShipType[] = data.results;
 
     return { data: starships };

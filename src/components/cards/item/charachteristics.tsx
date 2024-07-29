@@ -1,21 +1,17 @@
 'use client';
 
 import Text from '@/components/ui/text';
-import type { CharacterCharacteristicsType } from '@/types/charachter';
+import type { CharacterCharacteristicsType } from '@/types/character';
 
 /**
- * Component to display characteristics of a person.
- * @param {CharacterCharacteristicsType} props - The characteristics data of the person.
- * @returns {JSX.Element} A section containing person characteristics.
+ * Component to display characteristics of a character.
+ * @param {CharacterCharacteristicsType} props - The characteristics data of the character.
+ * @returns {JSX.Element} A section containing character characteristics.
  */
-export default function PersonCharacteristics({
-  data,
-}: {
-  data: CharacterCharacteristicsType;
-}): JSX.Element {
+export default function CharacterCharacteristics({ data }: { data: CharacterCharacteristicsType }): JSX.Element {
   return (
     <>
-      <Text className="text-center my-4">Hero stats: </Text>
+      <Text className="text-center my-4">Appearance:</Text>
       <section className="flex justify-between">
         <div>
           <Characteristic label="Height" value={data.height} />
@@ -36,13 +32,7 @@ export default function PersonCharacteristics({
  * @param {string | number} value - The value of the characteristic.
  * @returns {JSX.Element} A text element containing the label and value of the characteristic.
  */
-function Characteristic({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}): JSX.Element {
+function Characteristic({ label, value }: { label: string; value: string | number }): JSX.Element {
   return (
     <Text>
       {label}: <span className="font-light">{value}</span>

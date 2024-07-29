@@ -1,7 +1,7 @@
 'use client';
 
 import Text from '@/components/ui/text';
-import type { CharacterInformationType } from '@/types/charachter';
+import type { CharacterInformationType } from '@/types/character';
 
 /**
  * Props for the Information component.
@@ -14,17 +14,17 @@ interface InformationProps {
 }
 
 /**
- * Component to display person information.
- * 
- * @param props - The properties containing person information.
- * @returns The JSX for rendering person information.
+ * Component to display character information.
+ *
+ * @param props - The properties containing character information.
+ * @returns The JSX for rendering character information.
  */
 export default function Information({ data }: InformationProps) {
   const { eye_color, birth_year, gender } = data;
 
   return (
     <>
-      <Text className="text-center my-4">Information</Text>
+      <Text className="text-center my-4">Known information</Text>
       <section className="flex justify-between">
         <div>
           <Text>

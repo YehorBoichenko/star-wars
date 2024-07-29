@@ -1,30 +1,18 @@
-// 'use server';
-
-// import api from '@/api/api';
-
-// /**
-//  * Fetches a charachter by ID
-//  * @param {number} id - The ID of the charachter
-//  * @returns {Promise<any>} The data of the charachter
-//  */
-
-// export async function getCharacter (id: number): Promise<any> {
-//   const response = await api.get(`/people/${id}`);
-
-  
-//   return response.data;
-
-// }
 'use server';
-import {  CharacterType } from "@/types/charachter"
-import api from "@/api/api";
+import { CharacterType } from '@/types/character';
+import api from '@/api/api';
 
+/**
+ * Fetches a character by ID from the API.
+ * @param id - The ID of the character to fetch.
+ * @returns A promise that resolves to the character data.
+ * @throws An error if the API request fails.
+ */
 export async function getCharacterById(id: string): Promise<CharacterType> {
-
-  
   try {
-    return (await api.get(`people/${id}`)).data
+    const response = await api.get(`people/${id}`);
+    return response.data;
   } catch (error) {
-    throw error
+    throw new Error(`Failed to fetch character with ID ${id}: ${error}`);
   }
 }

@@ -16,11 +16,7 @@ interface TextProps {
  * @param {ReactNode} props.children - The child components
  * @returns {JSX.Element} The rendered component
  */
-const Text: FC<TextProps> = ({
-  as: Element = 'p',
-  className = '',
-  children,
-}) => {
+const Text: FC<TextProps> = ({ as: Element = 'p', className = '', children }) => {
   return <Element className={`text-base ${className}`}>{children}</Element>;
 };
 
